@@ -9,7 +9,7 @@ type Props = {
 
 export default function Board({ boardName, tickets }: Props) {
   return (
-    <ul className="min-h-[calc(100vh-9rem)] max-h-screen p-2 flex flex-col gap-5 bg-slate-100 rounded-md">
+    <ul className="min-h-[calc(100vh-9rem)] max-h-[calc(100vh-9rem)] p-2 flex flex-col gap-5 bg-slate-100 rounded-md">
       <div className="sm:min-h-14 md:min-h-0 flex items-center gap-2 text-gray-500">
         <h3 className="text-lg font-bold">{boardName}</h3>
         <span className="rounded-full px-2 text-sm bg-gray-200">
@@ -19,7 +19,7 @@ export default function Board({ boardName, tickets }: Props) {
       <Droppable droppableId={boardName}>
         {(provided, snapshot) => (
           <div
-            className="grow flex flex-col gap-3"
+            className="grow flex flex-col gap-3 overflow-y-scroll"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
