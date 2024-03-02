@@ -1,49 +1,27 @@
 import Image from "next/image";
 import Tag from "@/app/ui/tag";
+import type { Ticket, LabelType } from "@/app/atoms/ticketState";
 
-type LabelType = 1 | 2 | 3 | 4;
-
-interface Ticket {
-  id: string;
-  title: string;
-  description: string;
-  label: LabelType;
-  number: 25;
-  user: {
-    id: string;
-    name: string;
-    avatar?: string;
-  };
-}
-
-const ticket1: Ticket = {
-  id: `ticket-${crypto.randomUUID()}`,
-  title: "Engage Jupiter Express for outer solar system travel",
-  description: "",
-  label: 4,
-  number: 25,
-  user: {
-    id: `user-${crypto.randomUUID()}`,
-    name: "John",
-    avatar: "1",
-  },
+type Props = {
+  index: number;
+  ticket: Ticket;
 };
 
-type Props = {};
-
-export default function Ticket({}: Props) {
+export default function DraggableTicket({ index, ticket }: Props) {
   return (
-    <li className="list-none w-80 p-3 flex flex-col gap-3 items-start rounded shadow">
-      <p className="text-lg text-gray-700">{ticket1.title}</p>
-      <Tag type={ticket1.label} text={getLabel(ticket1.label)} />
+    <li className="list-none w-full p-3 flex flex-col gap-3 items-start bg-white rounded shadow">
+      <p className="text-lg text-gray-700">{ticket.title}</p>
+      <Tag type={ticket.label} text={getLabel(ticket.label)} />
       <div className="ml-auto flex items-center gap-2">
-        <span className="font-semibold text-gray-500">{`TIS-${ticket1.number}`}</span>
-        <Image
-          width={28}
-          height={28}
-          src={`/avatar/${ticket1.user.avatar}.png`}
-          alt="user avatar image"
-        />
+        <span className="font-semibold text-gray-500">{`TIS-${ticket.number}`}</span>
+        {ticket.assignee && (
+          <Image
+            width={28}
+            height={28}
+            src={`/avatar/${ticket.assignee.avatar}.png`}
+            alt="user avatar image"
+          />
+        )}
       </div>
     </li>
   );
