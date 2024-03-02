@@ -19,7 +19,7 @@ export default function Board({ boardName, tickets }: Props) {
       <Droppable droppableId={boardName}>
         {(provided, snapshot) => (
           <div
-            className="flex flex-col gap-3"
+            className="grow flex flex-col gap-3"
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
