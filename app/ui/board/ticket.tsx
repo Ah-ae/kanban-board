@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Image from "next/image";
 import { Draggable } from "react-beautiful-dnd";
 import Tag from "@/app/ui/tag";
@@ -8,7 +9,7 @@ type Props = {
   ticket: Ticket;
 };
 
-export default function DraggableTicket({ index, ticket }: Props) {
+function DraggableTicket({ index, ticket }: Props) {
   return (
     <Draggable draggableId={ticket.id} index={index}>
       {(provided, snapshot) => (
@@ -38,6 +39,8 @@ export default function DraggableTicket({ index, ticket }: Props) {
     </Draggable>
   );
 }
+
+export default memo(DraggableTicket);
 
 const getLabel = (type: LabelType) => {
   switch (type) {
