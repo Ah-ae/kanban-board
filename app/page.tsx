@@ -1,5 +1,23 @@
-import Image from "next/image";
+import executeQuery from "@/app/_lib/db";
 
-export default function Home() {
-  return <p>Home page</p>;
+interface User {
+  id: number;
+  name: string;
+  avatar: string;
+}
+
+export default async function Home() {
+  const sql = "select * from users";
+  const data = (await executeQuery(sql, "")) as User[];
+
+  return (
+    <>
+      {data.length > 0 &&
+        data.map((user) => (
+          <p key={user.id}>
+            {user.id} {user.name} {user.avatar}
+          </p>
+        ))}
+    </>
+  );
 }
